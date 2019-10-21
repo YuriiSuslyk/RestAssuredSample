@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -17,6 +18,7 @@ public class RestAssured {
                 .then()
                 .statusCode(200)
                 .and()
-                .body("data.last_name", hasItem("Ferguson"));
+                .body("data.last_name", hasItem("Ferguson"))
+        .body(matchesJsonSchemaInClasspath("schema.json"));
     }
 }
